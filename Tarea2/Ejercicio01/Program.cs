@@ -1,3 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-Console.WriteLine("Hello, World!");
+using Ejercicio01;
+
+ControlPelicula controlPelicula = new ControlPelicula();
+controlPelicula.inicializarDatos();
+controlPelicula.showMenuPrincipal();
