@@ -283,17 +283,17 @@ namespace Ejercicio01
         public void inicializarDatos()
         {
             // peliculas de accion
-            Pelicula pelicula1 = new Pelicula("1", "El Padrino", "Accion", "Francis Ford Coppola", 1972);
-            Pelicula pelicula2 = new Pelicula("2", "El Padrino: Parte II", "Accion", "Francis Ford Coppola", 1974);
+            Pelicula pelicula1 = new Pelicula("1", "Spider-Man: Sin Camino a Casa", "Accion", "David H. Venghaus Jr.", 2021);
+            Pelicula pelicula2 = new Pelicula("2", "Venom 2", "Accion", "Andy Serkis", 2021);
             // peliculas de drama
-            Pelicula pelicula3 = new Pelicula("3", "El Padrino", "Drama", "Francis Ford Coppola", 1972);
-            Pelicula pelicula4 = new Pelicula("4", "El Padrino: Parte II", "Drama", "Francis Ford Coppola", 1974);
+            Pelicula pelicula3 = new Pelicula("3", "Chernóbil: la película", "Drama", "Danila Kozlovski", 2021);
+            Pelicula pelicula4 = new Pelicula("4", "La hija oscura", "Drama", "Maggie Gyllenhaal", 2020);
             // peliculas de comedia
-            Pelicula pelicula5 = new Pelicula("5", "El Padrino", "Comedia", "Francis Ford Coppola", 1972);
-            Pelicula pelicula6 = new Pelicula("6", "El Padrino: Parte II", "Comedia", "Francis Ford Coppola", 1974);
+            Pelicula pelicula5 = new Pelicula("5", "The Adam Project", "Comedia", "Shawn Levy", 2022);
+            Pelicula pelicula6 = new Pelicula("6", "Marry Me", "Comedia", "Kat Coiro", 2022);
             // peliculas de terror
-            Pelicula pelicula7 = new Pelicula("7", "El Padrino", "Terror", "Francis Ford Coppola", 1972);
-            Pelicula pelicula8 = new Pelicula("8", "El Padrino: Parte II", "Terror", "Francis Ford Coppola", 1974);
+            Pelicula pelicula7 = new Pelicula("7", "Espíritus oscuros", "Terror", "Scott Cooper", 2021);
+            Pelicula pelicula8 = new Pelicula("8", "Separation", "Terror", "William Brent Bell", 1974);
             
             // agregar peliculas
             _peliculas.Add(pelicula1);
