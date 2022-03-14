@@ -15,6 +15,7 @@ namespace Ejercicio01
             Console.Clear();
             do
             {
+                Console.WriteLine("--- MENU PRINCIPAL: CONTROL DE PELICULAS ---");
                 Console.WriteLine("1) Agregar pelicula");
                 Console.WriteLine("2) Eliminar pelicula");
                 Console.WriteLine("3) Mostrar peliculas");

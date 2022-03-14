@@ -19,6 +19,7 @@ public class ControlTienda
         int opcionSeleccionada = 0;
         do
         {
+            Console.WriteLine("--- MENU PRINCIPAL DE LA TIENDA ---");
             Console.WriteLine("1) Administrar Productos");
             Console.WriteLine("2) Administrar Clientes");
             Console.WriteLine("3) Administrar Ventas");
@@ -41,7 +42,6 @@ public class ControlTienda
                 Console.WriteLine("Saliendo...");
                 break;
         }
-        
     }
 
     private void showMenuVentas()
@@ -53,7 +53,7 @@ public class ControlTienda
             Console.WriteLine("--- Administración de Ventas ---");
             Console.WriteLine("1) Listar Ventas");
             Console.WriteLine("2) Realizar Venta");
-            Console.WriteLine("3) Informe Ventas");
+            Console.WriteLine("3) Informe De Ventas");
             Console.WriteLine("4) Regresar...");
             Console.Write("Seleccione una opción: ");
         } while (!validaMenu(4, ref opcionSeleccionada));
@@ -61,6 +61,7 @@ public class ControlTienda
         switch (opcionSeleccionada)
         {
             case 1:
+                Console.WriteLine("--- Listado de Ventas ---");
                 listarVentas();
                 Console.WriteLine("Presione 'Enter' para continuar...");
                 Console.ReadLine();
@@ -99,7 +100,7 @@ public class ControlTienda
         {
             ganancias += venta.Total;
         }
-        Console.WriteLine("Ganancias totales: {0}", ganancias);
+        Console.WriteLine("Ganancias totales: ${0}", ganancias);
         
         // contar los cada producto vendido y su cantidad vendida y mostrarlo
         Dictionary<Producto, int> productosVendidos = new Dictionary<Producto, int>();
@@ -156,7 +157,7 @@ public class ControlTienda
                 {
                     // Se realiza el calculo del total de la venta
                     totalVenta = productoVen.Precio * cantidad;
-                    Console.WriteLine("Total a pagar: " + totalVenta);
+                    Console.WriteLine("Total a pagar: $" + totalVenta);
                     // obtener la feccha actual
                     DateTime fecha = DateTime.Now;
                     // Se crea la venta
@@ -219,6 +220,7 @@ public class ControlTienda
         switch (opcionSeleccionada)
         {
             case 1:
+                Console.WriteLine("--- Listado de Clientes ---");
                 listarClientes();
                 Console.WriteLine("Presione 'Enter' para continuar...");
                 Console.ReadLine();
@@ -343,6 +345,7 @@ public class ControlTienda
         switch (opcionSeleccionada)
         {
             case 1:
+                Console.WriteLine("--- Listado de Productos ---");
                 listarProductos();
                 Console.WriteLine("Presione una tecla para continuar...");
                 Console.ReadLine();

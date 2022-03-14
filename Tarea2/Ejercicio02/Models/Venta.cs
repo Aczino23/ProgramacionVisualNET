@@ -54,8 +54,8 @@ public class Venta
                "\nId_Cliente: " + _cliente.IdCliente +
                "\nId_Producto: " + _producto.Id_producto+
                "\nCantidad_Comprada: " + _cantidad +
-               "\nPrecio_Unitario: " + _producto.Precio +
-               "\nTotal: " + _total + 
+               "\nPrecio_Unitario:"  + "$" + _producto.Precio +
+               "\nTotal: " + "$" + _total +
                "\nFecha: " + _fecha + "\n";
     }
 }

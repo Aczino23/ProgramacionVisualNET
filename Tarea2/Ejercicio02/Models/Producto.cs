@@ -51,7 +51,7 @@ public class Producto
     {
         return "Id_producto: " + _idProducto + 
                "\nNombre: " + _nombre + 
-               "\nPrecio: " + _precio + 
+               "\nPrecio: $" + _precio + 
                "\nCantidad: " + _cantidad + 
                "\nCatetgoria: " + _categoria + "\n";
     }
