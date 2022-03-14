@@ -2,13 +2,13 @@ namespace Ejercicio02;
 
 public class Cliente
 {
-    private string _idCliente;
+    private int _idCliente;
     private string _nombre;
     private string _apellido;
     private string _direccion;
     private string _telefono;
     
-    public Cliente(string idCliente, string nombre, string apellido, string direccion, string telefono)
+    public Cliente(int idCliente, string nombre, string apellido, string direccion, string telefono)
     {
         this._idCliente = idCliente;
         this._nombre = nombre;
@@ -17,7 +17,7 @@ public class Cliente
         this._telefono = telefono;
     }
     
-    public string IdCliente
+    public int IdCliente
     {
         get { return _idCliente; }
         set { _idCliente = value; }
@@ -45,5 +45,14 @@ public class Cliente
     {
         get { return _telefono; }
         set { _telefono = value; }
+    }
+    
+    public override string ToString()
+    {
+        return "IdCliente: " + _idCliente + 
+               "\nNombre: " + _nombre + 
+               "\nApellido: " + _apellido + 
+               "\nDireccion: " + _direccion + 
+               "\nTelefono: " + _telefono + "\n";
     }
 }

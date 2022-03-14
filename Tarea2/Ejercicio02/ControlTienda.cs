@@ -15,8 +15,8 @@ public class ControlTienda
     
     public void showMenuPrincipal()
     {
-        int opcionSeleccionada = 0;
         Console.Clear();
+        int opcionSeleccionada = 0;
         do
         {
             Console.WriteLine("1) Administrar Productos");
@@ -44,10 +44,131 @@ public class ControlTienda
         
     }
 
-    private void showMenuProductos()
+    private void showMenuVentas()
     {
-        int opcionSeleccionada = 0;
         Console.Clear();
+        int opcionSeleccionada = 0;
+    }
+
+    private void showMenuClientes()
+    {
+        Console.Clear();
+        int opcionSeleccionada = 0;
+        do
+        {
+            Console.WriteLine("--- Administración de Clientes ---");
+            Console.WriteLine("1) Listar Clientes");
+            Console.WriteLine("2) Agregar Cliente");
+            Console.WriteLine("3) Editar Cliente");
+            Console.WriteLine("4) Eliminar Cliente");
+            Console.WriteLine("5) Regresar...");
+            Console.Write("Seleccione una opción: ");
+        } while (!validaMenu(5, ref opcionSeleccionada));
+        Console.Clear();
+        switch (opcionSeleccionada)
+        {
+            case 1:
+                listarClientes();
+                Console.WriteLine("Presione 'Enter' para continuar...");
+                Console.ReadLine();
+                showMenuClientes();
+                break;
+            case 2:
+                agregarCliente();
+                break;
+            case 3:
+                editarCliente();
+                break;
+            case 4:
+                eliminarCliente();
+                break;
+            case 5:
+                showMenuPrincipal();
+                break;
+        }
+    }
+
+    private void eliminarCliente()
+    {
+        int? id;
+        listarClientes();
+        id = pedirValorInt("Ingrese el ID del cliente a eliminar");
+        Cliente? clienteEliminar = _clientes.FirstOrDefault(c => c.IdCliente == id);
+        if (clienteEliminar != null)
+        {
+            _clientes.Remove(clienteEliminar);
+            Console.WriteLine("Cliente eliminado correctamente, presione 'Enter' para continuar...");
+        }
+        else
+        {
+            Console.WriteLine("No se encontró el cliente, presione 'Enter' para continuar...");
+        }
+        Console.ReadLine();
+        showMenuClientes();
+    }
+
+    private void editarCliente()
+    {
+        int? id;
+        string? nombre;
+        string? apellido;
+        string? direccion;
+        string? telefono;
+        listarClientes();
+        id = pedirValorInt("Ingrese el ID del cliente a editar");
+        Cliente? clienteEditar = _clientes.FirstOrDefault(c => c.IdCliente == id);
+        if (clienteEditar == null)
+        {
+            Console.WriteLine("No se encontró el cliente, presione 'Enter' para continuar...");
+            
+        }
+        else
+        {
+            nombre = pedirValorString("Ingrese el nombre del cliente");
+            apellido = pedirValorString("Ingrese el apellido del cliente");
+            direccion = pedirValorString("Ingrese la dirección del cliente");
+            telefono = pedirValorString("Ingrese el teléfono del cliente");
+            clienteEditar.Nombre = nombre;
+            clienteEditar.Apellido = apellido;
+            clienteEditar.Direccion = direccion;
+            clienteEditar.Telefono = telefono;
+            Console.WriteLine("Cliente editado correctamente, presione 'Enter' para continuar...");
+        }
+        Console.ReadLine();
+        showMenuClientes();
+    }
+
+    private void agregarCliente()
+    {
+        string? nombre;
+        string? apellido;
+        string? direccion;
+        string? telefono;
+        
+        Console.Write("--- Agregar Cliente ---\n");
+        nombre = pedirValorString("Nombre del cliente");
+        apellido = pedirValorString("Apellido del cliente");
+        direccion = pedirValorString("Dirección del cliente");
+        telefono = pedirValorString("Teléfono del cliente");
+        Cliente? nuevoCliente = new Cliente(_clientes.Count() + 1,nombre, apellido, direccion, telefono);
+        _clientes.Add(nuevoCliente);
+        Console.WriteLine("Cliente agregado con éxito, presione 'Enter' para continuar...");
+        Console.ReadLine();
+        showMenuClientes();
+    }
+
+    private void listarClientes()
+    {
+        foreach (Cliente cliente in _clientes)
+        {
+            Console.WriteLine(cliente.ToString());
+        }
+    }
+
+    private void showMenuProductos()
+    { 
+        Console.Clear();
+        int opcionSeleccionada = 0;
         do
         {
             Console.WriteLine("--- Adminstración de Productos ---");
@@ -57,7 +178,7 @@ public class ControlTienda
             Console.WriteLine("4) Eliminar Producto");
             Console.WriteLine("5) Regresar...");
             Console.Write("Seleccione una opción: ");
-        } while (!validaMenu(4, ref opcionSeleccionada));
+        } while (!validaMenu(5, ref opcionSeleccionada));
         Console.Clear();
         switch (opcionSeleccionada)
         {
@@ -69,6 +190,7 @@ public class ControlTienda
                 break;
             case 2:
                 agregarProducto();
+                
                 break;
             case 3:
                 editarProducto();
@@ -82,56 +204,74 @@ public class ControlTienda
         }
     }
 
+    private void eliminarProducto()
+    {
+        int? id;
+        listarProductos();
+        id = pedirValorInt("Ingrese el ID del producto a eliminar");
+        if (id != null)
+        {
+            Producto? producto = _productos.Find(x => x.Id_producto == id);
+            if (producto != null)
+            {
+                _productos.Remove(producto);
+                Console.WriteLine("Producto eliminado correctamente, presione 'Enter' para continuar...");
+            }
+            else
+            {
+                Console.WriteLine("No se encontró el producto, presione 'Enter' para continuar...");
+            }
+        }
+        Console.ReadLine();
+        showMenuProductos();
+        
+    }
+
     private void editarProducto()
     {
-        int id;
+        int? id;
         string? nombre;
         float precio;
         int cantidad;
         string? categoria;
         listarProductos();
-        Console.WriteLine("--- Editar Producto ---");
-        id = pedirValorInt("Ingrese el ID del producto a editar: ");
+        id = pedirValorInt("Ingrese el ID del producto a editar");
         Producto? productoEditar = _productos.FirstOrDefault(p => p.Id_producto == id);
         if (productoEditar == null)
         {
-            Console.WriteLine("No se encontró el producto con el ID ingresado.");
-            Console.WriteLine("Presione una tecla para continuar...");
-            Console.ReadLine();
-            showMenuProductos();
+            Console.WriteLine("No se encontró el producto, presione 'Enter' para continuar...");
+          
         }
         else
         {
-            nombre = pedirValorString("Ingrese el nombre del producto: ");
-            precio = pedirValorFloat("Ingrese el precio del producto: ");
-            cantidad = pedirValorInt("Ingrese la cantidad del producto: ");
-            categoria = pedirValorString("Ingrese la categoria del producto: ");
+            nombre = pedirValorString("Ingrese el nombre del producto");
+            precio = pedirValorFloat("Ingrese el precio del producto");
+            cantidad = pedirValorInt("Ingrese la cantidad del producto");
+            categoria = pedirValorString("Ingrese la categoria del producto");
             productoEditar.Nombre = nombre;
             productoEditar.Precio = precio;
             productoEditar.Cantidad = cantidad;
             productoEditar.Categoria = categoria;
-            Console.WriteLine("Producto editado correctamente, presione una tecla para continuar...");
-            Console.ReadLine();
-            showMenuProductos();
+            Console.WriteLine("Producto editado correctamente, presione 'Enter' para continuar...");
         }
+        Console.ReadLine();
+        showMenuProductos();
     }
 
     private void agregarProducto()
     {
-        int id;
         string? nombre;
         float precio;
         int cantidad;
         string? categoria;
-        Console.Write("--- Agregar Producto ---");
-        id = _productos.Count() + 1;
+        Console.Write("--- Agregar Producto ---" + "\n");
         nombre = pedirValorString("Nombre del producto");
         precio = pedirValorFloat("Precio del producto");
         cantidad = pedirValorInt("Cantidad del producto");
         categoria = pedirValorString("Categoria del producto");
-        Producto nuevoProducto = new Producto(id, nombre, precio, cantidad, categoria);
+        Producto nuevoProducto = new Producto(_productos.Count() + 1, nombre, precio, cantidad, categoria);
         _productos.Add(nuevoProducto);
-        Console.WriteLine("Producto agregado exitosamente, presione una tecla para continuar...");
+        Console.WriteLine("Producto agregado exitosamente, presione 'Enter' para continuar...");
         Console.ReadLine();
         showMenuProductos();
     }
@@ -217,7 +357,7 @@ public class ControlTienda
             Console.Write($"{texto}: ");
             if (float.TryParse(Console.ReadLine(), out valor))
             {
-                if (valor < 0)
+                if (valor < 0 )
                 {
                     Console.WriteLine("Valor inválido.");
                 }
@@ -228,6 +368,34 @@ public class ControlTienda
             }
         } while (valor < 0);
         return valor;
+    }
+
+    public void inicializarDatos()
+    {
+        // Productos
+        Producto producto1 = new Producto(1, "Leche", 20f, 10, "Alimento");
+        Producto producto2 = new Producto(2, "Arroz", 10.5f, 20, "Alimento");
+        Producto producto3 = new Producto(3, "Jabon", 5.5f, 5, "Limpieza");
+        Producto producto4 = new Producto(4, "Cloro", 12.5f, 3, "Limpieza");
+        Producto producto5 = new Producto(5, "Café", 20.39f, 15, "Alimento");
+        
+        // agregamos los productos a la lista
+        _productos.Add(producto1);
+        _productos.Add(producto2);
+        _productos.Add(producto3);
+        _productos.Add(producto4);
+        _productos.Add(producto5);
+        
+        // Clientes
+        Cliente cliente1 = new Cliente(1, "Juan", "Perez", "Zacatecas", "4927896464");
+        Cliente cliente2 = new Cliente(2, "Pedro", "Gonzalez", "Sinaloa", "8787590834");
+        Cliente cliente3 = new Cliente(3, "Ana", "Lopez", "Chihuahua", "758790834");
+        
+        // agregamos los clientes a la lista
+        _clientes.Add(cliente1);
+        _clientes.Add(cliente2);
+        _clientes.Add(cliente3);
+        
     }
     
 }
