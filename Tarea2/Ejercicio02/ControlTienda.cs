@@ -21,7 +21,7 @@ public class ControlTienda
         {
             Console.WriteLine("1) Administrar Productos");
             Console.WriteLine("2) Administrar Clientes");
-            Console.WriteLine("3)Administrar Ventas");
+            Console.WriteLine("3) Administrar Ventas");
             Console.WriteLine("4) Salir");
             Console.Write("Seleccione una opción: ");
         } while (!validaMenu(4, ref opcionSeleccionada));
@@ -48,6 +48,157 @@ public class ControlTienda
     {
         Console.Clear();
         int opcionSeleccionada = 0;
+        do
+        {
+            Console.WriteLine("--- Administración de Ventas ---");
+            Console.WriteLine("1) Listar Ventas");
+            Console.WriteLine("2) Realizar Venta");
+            Console.WriteLine("3) Informe Ventas");
+            Console.WriteLine("4) Regresar...");
+            Console.Write("Seleccione una opción: ");
+        } while (!validaMenu(4, ref opcionSeleccionada));
+        Console.Clear();
+        switch (opcionSeleccionada)
+        {
+            case 1:
+                listarVentas();
+                Console.WriteLine("Presione 'Enter' para continuar...");
+                Console.ReadLine();
+                showMenuVentas();
+                break;
+            case 2:
+                if (_clientes.Count == 0 || _productos.Count == 0)
+                {
+                    Console.WriteLine("No hay clientes o productos registrados, presione 'Enter' para continuar...");
+                    Console.ReadLine();
+                    showMenuVentas();
+                }
+                else
+                {
+                    realizarVenta();
+                }
+                break;
+            case 3:
+                informeVentas();
+                break;
+            case 4:
+                showMenuPrincipal();
+                break;
+        }
+    }
+
+    private void informeVentas()
+    {
+        // bucara el producto mas vendido
+        double ganancias = 0;
+
+        Console.WriteLine("Total de ventas realizadas: {0}", _ventas.Count);
+        
+        // obtener la galancia total
+        foreach (Venta venta in _ventas)
+        {
+            ganancias += venta.Total;
+        }
+        Console.WriteLine("Ganancias totales: {0}", ganancias);
+        
+        // contar los cada producto vendido y su cantidad vendida y mostrarlo
+        Dictionary<Producto, int> productosVendidos = new Dictionary<Producto, int>();
+        foreach (Venta venta in _ventas)
+        {
+            foreach (Producto producto in _productos)
+            {
+                if (venta.Producto == producto)
+                {
+                    if (productosVendidos.ContainsKey(producto))
+                    {
+                        productosVendidos[producto]++;
+                    }
+                    else
+                    {
+                        productosVendidos.Add(producto, 1);
+                    }
+                }
+            }
+        }
+        Console.WriteLine("--- Ventas realizadas por producto ---");
+        foreach (KeyValuePair<Producto, int> producto in productosVendidos)
+        {
+            Console.WriteLine("{0}: {1} ventas", producto.Key.Nombre, producto.Value);
+        }
+        Console.WriteLine("Presione 'Enter' para continuar...");
+        Console.ReadLine();
+        showMenuVentas();
+    }
+
+    private void realizarVenta()
+    {
+        int? idCliente;
+        int? idProducto;
+        double totalVenta = 0;
+
+        listarClientes();
+        idCliente = pedirValorInt("Seleccione al cliente");
+        Cliente? clienteVen = _clientes.FirstOrDefault(c => c.IdCliente == idCliente);
+        if (clienteVen != null)
+        {
+            Console.Clear();
+            listarProductos();
+            idProducto = pedirValorInt("Seleccione el producto");
+            Producto? productoVen = _productos.FirstOrDefault(p => p.Id_producto == idProducto);
+            if (productoVen != null)
+            {
+                Console.Clear();
+                Console.WriteLine("Cantidad en stock: {0}", productoVen.Cantidad);
+                Console.WriteLine("Cliente seleccionado: " + clienteVen.Nombre + " " + clienteVen.Apellido);
+                Console.WriteLine("Producto seleccionado: " + productoVen.Nombre);
+                int cantidad = pedirValorInt("Ingrese la cantidad a vender");
+                if (cantidad > 0 && cantidad <= productoVen.Cantidad)
+                {
+                    // Se realiza el calculo del total de la venta
+                    totalVenta = productoVen.Precio * cantidad;
+                    Console.WriteLine("Total a pagar: " + totalVenta);
+                    // obtener la feccha actual
+                    DateTime fecha = DateTime.Now;
+                    // Se crea la venta
+                    Venta venta = new Venta(_ventas.Count + 1, clienteVen, productoVen, cantidad, totalVenta, fecha);
+                    _ventas.Add(venta);
+                    // Se actualiza la cantidad de productos
+                    productoVen.Cantidad -= cantidad;
+                    Console.WriteLine("Venta realizada con éxito, presione 'Enter' para continuar...");
+                }
+                else
+                {
+                    Console.WriteLine("La cantidad ingresada no es válida, presione 'Enter' para continuar...");
+                }
+               
+            }
+            else
+            {
+                Console.WriteLine("Producto no encontrado, presione 'Enter' para continuar...");
+                
+            }
+        }
+        else
+        {
+            Console.WriteLine("Cliente no encontrado, presione 'Enter' para continuar...");
+        }
+        Console.ReadLine();
+        showMenuVentas();
+    }
+
+    private void listarVentas()
+    {
+        if (_ventas.Count > 0)
+        {
+            foreach (Venta venta in _ventas)
+            {
+                Console.WriteLine(venta.ToString());
+            }
+        }
+        else
+        {
+            Console.WriteLine("No hay ventas registradas");
+        }
     }
 
     private void showMenuClientes()
@@ -90,6 +241,7 @@ public class ControlTienda
 
     private void eliminarCliente()
     {
+        Console.Clear();
         int? id;
         listarClientes();
         id = pedirValorInt("Ingrese el ID del cliente a eliminar");
@@ -157,11 +309,19 @@ public class ControlTienda
         showMenuClientes();
     }
 
-    private void listarClientes()
+    private void listarClientes()   
     {
-        foreach (Cliente cliente in _clientes)
+        if (_clientes.Count > 0)
         {
-            Console.WriteLine(cliente.ToString());
+            Console.WriteLine("--- Listado de Clientes ---");
+            foreach (Cliente cliente in _clientes)
+            {
+                Console.WriteLine(cliente.ToString());
+            }
+        }
+        else
+        {
+            Console.WriteLine("No hay clientes registrados");
         }
     }
 
@@ -279,9 +439,16 @@ public class ControlTienda
     private void listarProductos()
     {
         Console.WriteLine("--- Lista de Productos ---");
-        foreach (Producto producto in _productos)
+        if (_productos.Count > 0)
         {
-            Console.WriteLine(producto.ToString());
+            foreach (Producto producto in _productos)
+            {
+                Console.WriteLine(producto.ToString());
+            }
+        }
+        else
+        {
+            Console.WriteLine("No hay productos registrados");
         }
     }
 
@@ -372,7 +539,7 @@ public class ControlTienda
 
     public void inicializarDatos()
     {
-        // Productos
+        // Creamos varios productos para probar el programa
         Producto producto1 = new Producto(1, "Leche", 20f, 10, "Alimento");
         Producto producto2 = new Producto(2, "Arroz", 10.5f, 20, "Alimento");
         Producto producto3 = new Producto(3, "Jabon", 5.5f, 5, "Limpieza");
@@ -386,7 +553,7 @@ public class ControlTienda
         _productos.Add(producto4);
         _productos.Add(producto5);
         
-        // Clientes
+        // Creamos varios clientes para probar
         Cliente cliente1 = new Cliente(1, "Juan", "Perez", "Zacatecas", "4927896464");
         Cliente cliente2 = new Cliente(2, "Pedro", "Gonzalez", "Sinaloa", "8787590834");
         Cliente cliente3 = new Cliente(3, "Ana", "Lopez", "Chihuahua", "758790834");
@@ -396,7 +563,27 @@ public class ControlTienda
         _clientes.Add(cliente2);
         _clientes.Add(cliente3);
         
+        // Inzializamos algunos ventas de prueba
+        double totalVenta1 = producto1.Precio * 5;
+        Venta venta1 = new Venta(1, cliente1, producto1, 5, totalVenta1, DateTime.Now);
+        producto1.Cantidad -= 5;
+        
+        double totalVenta2 = producto1.Precio * 2;
+        Venta venta2 = new Venta(2, cliente2, producto1, 2, totalVenta2, DateTime.Now);
+        producto1.Cantidad -= 2;
+        
+        double totalVenta3 = producto2.Precio * 3;
+        Venta venta3 = new Venta(3, cliente3, producto2, 3, totalVenta3, DateTime.Now);
+        producto2.Cantidad -= 3;
+        
+        double totalVenta4 = producto3.Precio * 1;
+        Venta venta4 = new Venta(4, cliente1, producto3, 1, totalVenta4, DateTime.Now);
+        producto3.Cantidad -= 1;
+        
+        // agregamos las ventas a la lista
+        _ventas.Add(venta1);
+        _ventas.Add(venta2);
+        _ventas.Add(venta3);
+        _ventas.Add(venta4);
     }
-    
 }
-

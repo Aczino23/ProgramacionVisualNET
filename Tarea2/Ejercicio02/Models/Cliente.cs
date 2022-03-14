@@ -49,7 +49,7 @@ public class Cliente
     
     public override string ToString()
     {
-        return "IdCliente: " + _idCliente + 
+        return "Id_Cliente: " + _idCliente + 
                "\nNombre: " + _nombre + 
                "\nApellido: " + _apellido + 
                "\nDireccion: " + _direccion + 
