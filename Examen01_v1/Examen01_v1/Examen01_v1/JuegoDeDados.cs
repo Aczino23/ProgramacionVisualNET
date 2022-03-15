@@ -111,7 +111,6 @@ public class JuegoDeDados
         Console.WriteLine("-> Cantidad de tiradas ganadas: " + _numeroDeTiradasGanadas);
         Console.WriteLine("-> Cantidad de tiradas perdidas: " + _numeroDeTiradasPerdidas);
         Console.WriteLine("-> Número que más veces se ha tirado: " + ValorMasTirado());
-        Console.WriteLine("-> Número que menos veces se ha tirado: " + ValorMenosTirado());
         double porcentajeEfectividad = 0;
         if (_cantidadTiradas > 0)
         {
@@ -232,16 +231,6 @@ public class JuegoDeDados
         }
     }
     
-    private object ValorMenosTirado()
-    {
-        int dos, tres, cuatro, cinco, seis;
-        int siete, ocho, nueve, diez, once, doce;
-        dos = tres = cuatro = cinco = seis = 0;
-        siete = ocho = nueve = diez = once = doce = 0;
-
-        return 0;
-    }
-
     private void VerHistorial()
     {
         Console.WriteLine("--- Historial de tiradas ---");
@@ -865,11 +854,11 @@ public class JuegoDeDados
         {
             _cantidadExtremos++;
         }
-        else if (_valoresMedios.Contains(numeroTirado))
+        if (_valoresMedios.Contains(numeroTirado))
         {
             _cantidadMedios++;     
         }
-        else if (numeroTirado % 2 == 0)
+        if (numeroTirado % 2 == 0)
         {
             _cantidadPares++;
         }
@@ -996,7 +985,7 @@ public class JuegoDeDados
         _resultados.Add(5);
         _resultados.Add(5);
         _resultados.Add(5);
-        
+
         validarNumeroTirado(5);
         validarNumeroTirado(5);
         validarNumeroTirado(5);
