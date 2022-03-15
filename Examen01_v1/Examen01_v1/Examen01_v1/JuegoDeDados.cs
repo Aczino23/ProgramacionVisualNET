@@ -3,10 +3,21 @@ using Examen01_v1.Models;
 namespace Examen01_v1;
 public class JuegoDeDados
 {
+    // dados
     private int _dado1;
     private int _dado2;
+    
+    // jugador
     private Jugador _jugador;
+    
+    // lista para guardar el historial de jugadas
     private List<string> _historial;
+    
+    // lista para guardar los resultados de cada tirada
+    private List<int> _resultados;
+    
+    // cantidad de dinero inicial del jugador
+    private double _cantidadDeDineroInicial;
     
     // arreglo para almacenar los numeros de cada tipo de apuesta
     private int[] _valoresEspecificos = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -20,25 +31,19 @@ public class JuegoDeDados
     private double _numeroDeTiradasGanadas = 0;
     private int _numeroDeTiradasPerdidas = 0;
     private int _cantidadExtremos = 0;
-    private int _cantidadExtremosGanados = 0;
-    private int _cantidadExtremosPerdidos = 0;
     private int _cantidadMedios = 0;
-    private int _cantidadMediosGanados = 0;
-    private int _cantidadMediosPerdidos = 0;
     private int _cantidadPares = 0;
-    private int _cantidadParesGanados = 0;
-    private int _cantidadParesPerdidos = 0;
     private int _cantidadImpares = 0;
-    private int _cantidadImparesGanados = 0;
-    private int _cantidadImparesPerdidos = 0;
 
 
     public JuegoDeDados(Jugador jugador)
     {
         _jugador = jugador;
         _historial = new List<string>();
+        _resultados = new List<int>();
         _dado1 = 0;
         _dado2 = 0;
+        _cantidadDeDineroInicial = _jugador.CantiadDeDinero;
     }
 
     public void ShowMenuPrincipal()
@@ -80,7 +85,18 @@ public class JuegoDeDados
                 VerEstadisticas();
                 break;
             case 4:
-                Console.WriteLine("--- Gracias por jugar " + _jugador.NickName + " ---"); 
+                Console.WriteLine("--- Gracias por jugar " + _jugador.NickName + " ---");
+                Console.WriteLine("Dinero inicial: " + _cantidadDeDineroInicial);
+                Console.WriteLine("Dinero final: " + _jugador.CantiadDeDinero);
+                // calculara la ganancia o perdida
+                if (_jugador.CantiadDeDinero > _cantidadDeDineroInicial)
+                {
+                    Console.WriteLine("Ganancia: " + (_jugador.CantiadDeDinero - _cantidadDeDineroInicial));
+                }
+                else
+                {
+                    Console.WriteLine("Perdida: " + (_cantidadDeDineroInicial - _jugador.CantiadDeDinero));
+                }
                 break;
         }
         
@@ -94,31 +110,136 @@ public class JuegoDeDados
         Console.WriteLine("-> Cantidad de tiradas: " + _cantidadTiradas);
         Console.WriteLine("-> Cantidad de tiradas ganadas: " + _numeroDeTiradasGanadas);
         Console.WriteLine("-> Cantidad de tiradas perdidas: " + _numeroDeTiradasPerdidas);
+        Console.WriteLine("-> Número que más veces se ha tirado: " + ValorMasTirado());
+        Console.WriteLine("-> Número que menos veces se ha tirado: " + ValorMenosTirado());
         double porcentajeEfectividad = 0;
         if (_cantidadTiradas > 0)
         {
             porcentajeEfectividad = (_numeroDeTiradasGanadas / _cantidadTiradas) * 100;
         }
         Console.WriteLine("-> Porcentaje de efectividad: " + Math.Round(porcentajeEfectividad, 2) + "%");
-        Console.WriteLine("----- Estadisticas de extremos ------");
-        Console.WriteLine("-> Cantidad de extremos: " + _cantidadExtremos);
-        Console.WriteLine("-> Cantidad de extremos ganados: " + _cantidadExtremosGanados);
-        Console.WriteLine("-> Cantidad de extremos perdidos: " + _cantidadExtremosPerdidos);
-        Console.WriteLine("------ Estadisticas de medios -------");
-        Console.WriteLine("-> Cantidad de medios: " + _cantidadMedios);
-        Console.WriteLine("-> Cantidad de medios ganados: " + _cantidadMediosGanados);
-        Console.WriteLine("-> Cantidad de medios perdidos: " + _cantidadMediosPerdidos);
-        Console.WriteLine("------- Estadisticas de pares ----------");
-        Console.WriteLine("-> Cantidad de pares: " + _cantidadPares);
-        Console.WriteLine("-> Cantidad de pares ganados: " + _cantidadParesGanados);
-        Console.WriteLine("-> Cantidad de pares perdidos: " + _cantidadParesPerdidos);
-        Console.WriteLine("------ Estadisticas de impares ------");
-        Console.WriteLine("-> Cantidad de impares: " + _cantidadImpares);
-        Console.WriteLine("-> Cantidad de impares ganados: " + _cantidadImparesGanados);
-        Console.WriteLine("-> Cantidad de impares perdidos: " + _cantidadImparesPerdidos);
+        Console.WriteLine("-> Cantidad de resultados extremos: " + _cantidadExtremos);
+        Console.WriteLine("-> Cantidad de resultados medios: " + _cantidadMedios);
+        Console.WriteLine("-> Cantidad de resultados pares: " + _cantidadPares);
+        Console.WriteLine("-> Cantidad de resultados impares: " + _cantidadImpares);
         Console.WriteLine("Presione 'Enter' para continuar...");
         Console.ReadLine();
         ShowMenuPrincipal();
+    }
+    
+    private int ValorMasTirado()
+    {
+        int dos, tres, cuatro, cinco, seis;
+        int siete, ocho, nueve, diez, once, doce;
+        dos = tres = cuatro = cinco = seis = 0;
+        siete = ocho = nueve = diez = once = doce = 0;
+        
+        // recorrer la lista _resultados y contar que numero es el mas tirado
+        if (_resultados.Count > 0)
+        {
+            foreach (var resultado in _resultados)
+            {
+                switch (resultado)
+                {
+                    case 2:
+                        dos++;
+                        break;
+                    case 3:
+                        tres++;
+                        break;
+                    case 4:
+                        cuatro++;
+                        break;
+                    case 5:
+                        cinco++;
+                        break;
+                    case 6:
+                        seis++;
+                        break;
+                    case 7:
+                        siete++;
+                        break;
+                    case 8:
+                        ocho++;
+                        break;
+                    case 9:
+                        nueve++;
+                        break;
+                    case 10:
+                        diez++;
+                        break;
+                    case 11:
+                        once++;
+                        break;
+                    case 12:
+                        doce++;
+                        break;
+                }
+            }
+            // comparar los valores y devolver el mas tirado 
+            if (dos > tres && dos > cuatro && dos > cinco && dos > seis && dos > siete && dos > ocho && dos > nueve && dos > diez && dos > once && dos > doce)
+            {
+                return 2;
+            }
+            else if (tres > dos && tres > cuatro && tres > cinco && tres > seis && tres > siete && tres > ocho && tres > nueve && tres > diez && tres > once && tres > doce)
+            {
+                return 3;
+            }
+            else if (cuatro > dos && cuatro > tres && cuatro > cinco && cuatro > seis && cuatro > siete && cuatro > ocho && cuatro > nueve && cuatro > diez && cuatro > once && cuatro > doce)
+            {
+                return 4;
+            }
+            else if (cinco > dos && cinco > tres && cinco > cuatro && cinco > seis && cinco > siete && cinco > ocho && cinco > nueve && cinco > diez && cinco > once && cinco > doce)
+            {
+                return 5;
+            }
+            else if (seis > dos && seis > tres && seis > cuatro && seis > cinco && seis > siete && seis > ocho && seis > nueve && seis > diez && seis > once && seis > doce)
+            {
+                return 6;
+            }
+            else if (siete > dos && siete > tres && siete > cuatro && siete > cinco && siete > seis && siete > ocho && siete > nueve && siete > diez && siete > once && siete > doce)
+            {
+                return 7;
+            }
+            else if (ocho > dos && ocho > tres && ocho > cuatro && ocho > cinco && ocho > seis && ocho > siete && ocho > nueve && ocho > diez && ocho > once && ocho > doce)
+            {
+                return 8;
+            }
+            else if (nueve > dos && nueve > tres && nueve > cuatro && nueve > cinco && nueve > seis && nueve > siete && nueve > ocho && nueve > diez && nueve > once && nueve > doce)
+            {
+                return 9;
+            }
+            else if (diez > dos && diez > tres && diez > cuatro && diez > cinco && diez > seis && diez > siete && diez > ocho && diez > nueve && diez > once && diez > doce)
+            {
+                return 10;
+            }
+            else if (once > dos && once > tres && once > cuatro && once > cinco && once > seis && once > siete && once > ocho && once > nueve && once > diez && once > doce)
+            {
+                return 11;
+            }
+            else if (doce > dos && doce > tres && doce > cuatro && doce > cinco && doce > seis && doce > siete && doce > ocho && doce > nueve && doce > diez && doce > once)
+            {
+                return 12;
+            }
+            else
+            {
+                return 0;
+            }
+        } 
+        else
+        {
+            return 0;
+        }
+    }
+    
+    private object ValorMenosTirado()
+    {
+        int dos, tres, cuatro, cinco, seis;
+        int siete, ocho, nueve, diez, once, doce;
+        dos = tres = cuatro = cinco = seis = 0;
+        siete = ocho = nueve = diez = once = doce = 0;
+
+        return 0;
     }
 
     private void VerHistorial()
@@ -293,6 +414,7 @@ public class JuegoDeDados
         int apuesta = 0;
         string respuesta = "";
         string historial = "";
+        do
         {
             apuesta = pedirValorInt(_jugador.NickName + " ¿Cuánto deseas apostar?");
         } while (!validaApuesta(apuesta));
@@ -318,13 +440,13 @@ public class JuegoDeDados
                         "\nGanancia: +$" + apuesta * 2;
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
-            _cantidadImparesGanados++;
             _gananciasTotales += apuesta * 2;
+            validarNumeroTirado(numeroTirado);
         }
         else
         {
             _jugador.CantiadDeDinero -= apuesta;
-            Console.WriteLine("--- Apostar a que el número es par ---");
+            Console.WriteLine("--- Apostar a que el número es impar ---");
             Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
             Console.WriteLine("-> Valor de los dados: " + numeroTirado);
             Console.WriteLine("--- ¡Lo siento! ¡Perdiste! ---, su saldo es de: $" + _jugador.CantiadDeDinero);
@@ -338,9 +460,10 @@ public class JuegoDeDados
                         "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
-            _cantidadImparesGanados++;
             _perdidasTotales += apuesta;
+            validarNumeroTirado(numeroTirado);
         }
+        _resultados.Add(numeroTirado);
         do
         {
             respuesta = pedirValorString(_jugador.NickName + " ¿Desea apostar otra vez? (S/N)");
@@ -366,7 +489,8 @@ public class JuegoDeDados
         int apuesta = 0;
         string respuesta = "";
         string historial = "";
-        {
+        do 
+        { 
             apuesta = pedirValorInt(_jugador.NickName + " ¿Cuánto deseas apostar?");
         } while (!validaApuesta(apuesta));
         Console.Clear();
@@ -391,8 +515,8 @@ public class JuegoDeDados
                         "\nGanancia: +$" + apuesta * 2;
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
-            _cantidadParesGanados++;
             _gananciasTotales += apuesta * 2;
+            validarNumeroTirado(numeroTirado);
         }
         else
         {
@@ -411,9 +535,10 @@ public class JuegoDeDados
                         "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
-            _cantidadParesPerdidos++;
             _perdidasTotales += apuesta;
+            validarNumeroTirado(numeroTirado);
         }
+        _resultados.Add(numeroTirado);
         do
         {
             respuesta = pedirValorString(_jugador.NickName + " ¿Desea apostar otra vez? (S/N)");
@@ -472,8 +597,8 @@ public class JuegoDeDados
                         "\nGanancia: +$" + apuesta * 4;
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
-            _cantidadMediosGanados++;
             _gananciasTotales += apuesta * 4;
+            validarNumeroTirado(numeroTirado);
         }
         else
         {
@@ -493,9 +618,10 @@ public class JuegoDeDados
                         "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
-            _cantidadMediosPerdidos++;
             _perdidasTotales += apuesta;
+            validarNumeroTirado(numeroTirado);
         }
+        _resultados.Add(numeroTirado);
         do
         {
             respuesta = pedirValorString(_jugador.NickName + " ¿Desea apostar otra vez? (S/N)");
@@ -568,8 +694,8 @@ public class JuegoDeDados
                         "\nGanancia: +$" + apuesta * 8;
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
-            _cantidadExtremosGanados++;
             _gananciasTotales += apuesta * 8;
+            validarNumeroTirado(numeroTirado);
         }
         else
         {
@@ -589,9 +715,10 @@ public class JuegoDeDados
                         "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
-            _cantidadExtremosPerdidos++;
             _perdidasTotales += apuesta;
+            validarNumeroTirado(numeroTirado);
         }
+        _resultados.Add(numeroTirado);
         do
         {
             respuesta = pedirValorString(_jugador.NickName + " ¿Desea apostar otra vez? (S/N)");
@@ -642,14 +769,15 @@ public class JuegoDeDados
         } while (!validaApuesta(apuesta));
         Console.Clear();
         TirarDados();
+        int numeroTirado = _dado1 + _dado2;
         _cantidadTiradas++;
-        if (numeroEspecifico == _dado1 + _dado2)
+        if (numeroEspecifico == numeroTirado)
         {
             _jugador.CantiadDeDinero += apuesta * 10;
             Console.WriteLine("--- Apuesta a un número específico (2-12) ---");
             Console.WriteLine("-> Valor apostado: " + numeroEspecifico);
             Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
-            Console.WriteLine("-> Valor de los dados: " + (_dado1 + _dado2));
+            Console.WriteLine("-> Valor de los dados: " + numeroTirado);
             Console.WriteLine("--- ¡Felicidades! ¡Has ganado $" + apuesta * 10 + "! ---");
             DateTime fecha = DateTime.Now;
             historial = "Tipo de apuesta: Número específico" + 
@@ -662,6 +790,7 @@ public class JuegoDeDados
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
             _gananciasTotales += apuesta * 10;
+            validarNumeroTirado(numeroTirado);
         }
         else
         {
@@ -669,7 +798,7 @@ public class JuegoDeDados
             Console.WriteLine("--- Apuesta a un número específico (2-12) ---");
             Console.WriteLine("-> Valor apostado: " + numeroEspecifico);
             Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
-            Console.WriteLine("-> Valor de los dados: " + (_dado1 + _dado2));
+            Console.WriteLine("-> Valor de los dados: " + numeroTirado);
             Console.WriteLine("--- ¡Lo siento! ¡Perdiste! ---, su saldo es de: $" + _jugador.CantiadDeDinero);
             DateTime fecha = DateTime.Now;
             historial = "Tipo de apuesta: Número específico" + 
@@ -681,8 +810,10 @@ public class JuegoDeDados
                         "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
+            validarNumeroTirado(numeroTirado);
             _perdidasTotales += apuesta;
         }
+        _resultados.Add(numeroTirado);
         do
         {
             respuesta = pedirValorString(_jugador.NickName + " ¿Desea apostar otra vez? (S/N)");
@@ -725,6 +856,26 @@ public class JuegoDeDados
         else
         {
             return true;
+        }
+    }
+
+    private void validarNumeroTirado(int numeroTirado)
+    {
+        if (_valoresExtremos.Contains(numeroTirado))
+        {
+            _cantidadExtremos++;
+        }
+        else if (_valoresMedios.Contains(numeroTirado))
+        {
+            _cantidadMedios++;     
+        }
+        else if (numeroTirado % 2 == 0)
+        {
+            _cantidadPares++;
+        }
+        else
+        {
+            _cantidadImpares++;
         }
     }
 
@@ -840,5 +991,14 @@ public class JuegoDeDados
         
         _historial.Add(historial1);
         _historial.Add(historial2);
+        
+        // algunos resultados de prueba para los valores que mas se repiten
+        _resultados.Add(5);
+        _resultados.Add(5);
+        _resultados.Add(5);
+        
+        validarNumeroTirado(5);
+        validarNumeroTirado(5);
+        validarNumeroTirado(5);
     }
 }

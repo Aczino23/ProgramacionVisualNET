@@ -7,7 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc1f633f-56d0-47b2-a2a3-26c042dbc0f0" name="Changes" comment="funcion de apostar par ó impar terminada">
+    <list default="true" id="bc1f633f-56d0-47b2-a2a3-26c042dbc0f0" name="Changes" comment="commit">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Examen01_v1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Examen01_v1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Examen01_v1/JuegoDeDados.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Examen01_v1/JuegoDeDados.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://D:/ProgramacionVisualNET/Examen01_v1/Examen01_v1/Examen01_v1/JuegoDeDados.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/ProgramacionVisualNET/Examen01_v1/Examen01_v1/Examen01_v1/JuegoDeDados.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -73,7 +75,7 @@
       <workItem from="1647294182599" duration="36000" />
       <workItem from="1647294279187" duration="2207000" />
       <workItem from="1647299741675" duration="7577000" />
-      <workItem from="1647309797373" duration="2383000" />
+      <workItem from="1647309797373" duration="6238000" />
     </task>
     <task id="LOCAL-00001" summary="se agrego el proyecto Examen01_v1">
       <created>1647275616148</created>
@@ -110,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647311830361</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="commit">
+      <created>1647312361284</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1647312361284</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +143,7 @@
     <MESSAGE value="apuesta de número específico y extremos, y historial y estadisticas terminada" />
     <MESSAGE value="apostara medios terminado" />
     <MESSAGE value="funcion de apostar par ó impar terminada" />
-    <option name="LAST_COMMIT_MESSAGE" value="funcion de apostar par ó impar terminada" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
 </project>
