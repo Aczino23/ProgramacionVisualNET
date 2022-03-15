@@ -1,29 +1,6 @@
 using Examen01_v1.Models;
 
 namespace Examen01_v1;
-// El juego consistirá en simular el lanzamiento de dos dados (dados de 6).
-// El jugador deberá iniciar con un monto de dinero inicial ($300).
-// El jugador podrá apostar la cantidad de dinero que quiera en sus apuestas, siempre
-// y cuando sean múltiplos de 10.
-// El jugador podrá elegir una de 4 formas diferentes de apostar:
-// 1. Apostar a un número específico (2-12), que multiplicará su apuesta por 10.
-// 2. Apostar a que el número es un extremo (2, 3, 4, 10, 11 ó 12), que multiplicará su apuesta por 8.
-// 3. Apostar a que el número es un medio (5, 6, 7, 8 ó 9), que multiplicará su apuesta por 4.
-// 4. Apostar si el número será par o impar, que multiplicará su apuesta por 2.
-// El juego almacenará cada tirada realizada y el jugador podrá revisar el historial de tiradas.
-// El jugador podrá revisar las siguientes estadísticas de sus tiradas:
-// 1. Balance.
-// 2. Cantidad de tiradas realizadas.
-// 3. Número que más veces se ha tirado
-// 4. Número que menos veces se ha tirado.
-// 5. Cantidad de resultados extremos
-// 6. Cantidad de resultados medios
-// 7. Cantidad de resultados pares
-// 8. Cantidad de resultados impares
-// El jugador podrá retirarse en el momento que quiera y al final se le deberá mostrar
-// un mensaje que le muestre cuánto dinero ganó o perdió, según sea el caso.
-// En caso de que el jugador se quede sin dinero, el juego terminará automáticamente.
-
 public class JuegoDeDados
 {
     private int _dado1;
@@ -834,12 +811,34 @@ public class JuegoDeDados
     }
 
     public void inizializarDatos()
-    {
+    {   
+        // Inicializcion de algunos datos para pruebas
         _cantidadTiradas = 15;
         _numeroDeTiradasGanadas = 6;
         _numeroDeTiradasPerdidas = 9;
         _gananciasTotales = 1500;
         _perdidasTotales = 1000;
         
+        // historial de tiradas de prueba
+        DateTime fecha = DateTime.Now;
+        string historial1 = "Tipo de apuesta: Número específico" + 
+                    "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
+                    "\nHora: " + fecha.ToString("HH:mm:ss") + 
+                    "\nValor apostado: " + 6 + 
+                    "\nDado1: " + 4 + ", Dado2: " + 2 + 
+                    "\nValor aleatorio: " + 6 + 
+                    "\nGanancia: +$" +  500;
+        
+        
+        string historial2 = "Tipo de apuesta: Número es par" + 
+                    "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
+                    "\nHora: " + fecha.ToString("HH:mm:ss") + 
+                    "\nApostar: Par" +
+                    "\nDado1: " + 5 + ", Dado2: " + 4 + 
+                    "\nValor de tirada: " + 9 + 
+                    "\nPerdida: -$" + 100;
+        
+        _historial.Add(historial1);
+        _historial.Add(historial2);
     }
 }
