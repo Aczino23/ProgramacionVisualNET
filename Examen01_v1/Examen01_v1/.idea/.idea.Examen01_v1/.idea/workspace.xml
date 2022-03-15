@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc1f633f-56d0-47b2-a2a3-26c042dbc0f0" name="Changes" comment="apuesta de número específico y extremos, y historial y estadisticas terminada">
+    <list default="true" id="bc1f633f-56d0-47b2-a2a3-26c042dbc0f0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Examen01_v1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Examen01_v1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Examen01_v1/JuegoDeDados.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Examen01_v1/JuegoDeDados.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Examen01_v1/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Examen01_v1/Program.cs" afterDir="false" />
@@ -71,7 +71,8 @@
       <workItem from="1647285932789" duration="2635000" />
       <workItem from="1647294182599" duration="36000" />
       <workItem from="1647294279187" duration="2207000" />
-      <workItem from="1647299741675" duration="7525000" />
+      <workItem from="1647299741675" duration="7577000" />
+      <workItem from="1647309797373" duration="1971000" />
     </task>
     <task id="LOCAL-00001" summary="se agrego el proyecto Examen01_v1">
       <created>1647275616148</created>
@@ -94,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647306666948</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="apostara medios terminado">
+      <created>1647307494331</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647307494331</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +124,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="se agrego el proyecto Examen01_v1" />
     <MESSAGE value="apuesta de número específico y extremos, y historial y estadisticas terminada" />
-    <option name="LAST_COMMIT_MESSAGE" value="apuesta de número específico y extremos, y historial y estadisticas terminada" />
+    <MESSAGE value="apostara medios terminado" />
+    <option name="LAST_COMMIT_MESSAGE" value="apostara medios terminado" />
   </component>
 </project>

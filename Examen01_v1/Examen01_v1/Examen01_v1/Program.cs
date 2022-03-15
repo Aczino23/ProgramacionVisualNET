@@ -8,4 +8,5 @@ Jugador jugador = new Jugador(1, "Juan", 1000);
 
 // inicializar el juego
 JuegoDeDados juegoDados = new JuegoDeDados(jugador);
+juegoDados.inizializarDatos();
 juegoDados.ShowMenuPrincipal();

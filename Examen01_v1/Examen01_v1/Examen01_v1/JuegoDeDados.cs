@@ -259,10 +259,200 @@ public class JuegoDeDados
                 }
                 break;
             case 4:
-                //ApostarParImpar();
+                if (_jugador.CantiadDeDinero >= 10)
+                {
+                    Console.WriteLine("--- Apostar a que el número sea par o impar ---");
+                    Console.WriteLine("-> Cantidad de dinero disponible: $" + _jugador.CantiadDeDinero);
+                    ApostarParImpar();
+                }
+                else
+                {
+                    Console.WriteLine(_jugador.NickName + " no tiene suficiente dinero para apostar, su saldo es de: $"
+                                                        + _jugador.CantiadDeDinero);
+                    Console.WriteLine("Presione 'Enter' para continuar...");
+                    Console.ReadLine();
+                    ShowMenuPrincipal();
+                }
                 break;
             case 5:
                 ShowMenuPrincipal();
+                break;
+        }
+    }
+
+    private void ApostarParImpar()
+    {
+        Console.Clear();
+        int opcionSeleccionada = 0;
+        do
+        {
+            Console.WriteLine("--- ¿Qué tipo de apuesta desea hacer? ---");
+            Console.WriteLine("1) Par");
+            Console.WriteLine("2) Impar");
+            Console.WriteLine("3) Regresar...");
+            Console.Write("Seleccione una opcion: ");
+        } while (!validaMenu(3, ref opcionSeleccionada));
+        Console.Clear();
+        switch (opcionSeleccionada)
+        {
+            case 1:
+                Console.WriteLine("--- Apostar a que el número sea par ---");
+                Console.WriteLine("-> Cantidad de dinero disponible: $" + _jugador.CantiadDeDinero);
+                ApuestaPar();
+                break;
+            case 2:
+                Console.WriteLine("--- Apostar a que el número sea impar ---");
+                Console.WriteLine("-> Cantidad de dinero disponible: $" + _jugador.CantiadDeDinero);
+                ApuestaImpar();
+                break;
+            case 3:
+                ShowMenuPrincipal();
+                break;
+        }
+    }
+
+    private void ApuestaImpar()
+    {
+        int apuesta = 0;
+        string respuesta = "";
+        string historial = "";
+        {
+            apuesta = pedirValorInt(_jugador.NickName + " ¿Cuánto deseas apostar?");
+        } while (!validaApuesta(apuesta));
+        Console.Clear();
+        TirarDados();
+        int numeroTirado = _dado1 + _dado2;
+        _cantidadTiradas++;
+        _cantidadImpares++;
+        if (numeroTirado % 2 != 0)
+        {
+            _jugador.CantiadDeDinero += apuesta * 2; 
+            Console.WriteLine("--- Apostar a que el número es impar ---");
+            Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
+            Console.WriteLine("-> Valor de los dados: " + numeroTirado);
+            Console.WriteLine("--- ¡Felicidades! ¡Has ganado $" + apuesta * 2 + "! ---");
+            DateTime fecha = DateTime.Now;
+            historial = "Tipo de apuesta: Número es impar" + 
+                        "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
+                        "\nHora: " + fecha.ToString("HH:mm:ss") + 
+                        "\nApostar: Impar" + 
+                        "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
+                        "\nValor de tirada: " + numeroTirado + 
+                        "\nGanancia: +$" + apuesta * 2;
+            _historial.Add(historial);
+            _numeroDeTiradasGanadas++;
+            _cantidadImparesGanados++;
+            _gananciasTotales += apuesta * 2;
+        }
+        else
+        {
+            _jugador.CantiadDeDinero -= apuesta;
+            Console.WriteLine("--- Apostar a que el número es par ---");
+            Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
+            Console.WriteLine("-> Valor de los dados: " + numeroTirado);
+            Console.WriteLine("--- ¡Lo siento! ¡Perdiste! ---, su saldo es de: $" + _jugador.CantiadDeDinero);
+            DateTime fecha = DateTime.Now;
+            historial = "Tipo de apuesta: Número es impar" + 
+                        "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
+                        "\nHora: " + fecha.ToString("HH:mm:ss") + 
+                        "\nApostar: Par" +
+                        "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
+                        "\nValor de tirada: " + numeroTirado + 
+                        "\nPerdida: -$" + apuesta;
+            _historial.Add(historial);
+            _numeroDeTiradasPerdidas++;
+            _cantidadImparesGanados++;
+            _perdidasTotales += apuesta;
+        }
+        do
+        {
+            respuesta = pedirValorString(_jugador.NickName + " ¿Desea apostar otra vez? (S/N)");
+            respuesta = respuesta.ToUpper();
+        } while (respuesta != "S" && respuesta != "N");
+        Console.Clear();
+        switch (respuesta)
+        {
+            case "S":
+                ShowMenuDeApuestas();
+                break;
+            case "N":
+                ShowMenuPrincipal();
+                break;
+            default:
+                Console.WriteLine("Opción inválida");
+                break;
+        }
+    }
+
+    private void ApuestaPar()
+    {
+        int apuesta = 0;
+        string respuesta = "";
+        string historial = "";
+        {
+            apuesta = pedirValorInt(_jugador.NickName + " ¿Cuánto deseas apostar?");
+        } while (!validaApuesta(apuesta));
+        Console.Clear();
+        TirarDados();
+        int numeroTirado = _dado1 + _dado2;
+        _cantidadTiradas++;
+        _cantidadPares++;
+        if (numeroTirado % 2 == 0)
+        {
+            _jugador.CantiadDeDinero += apuesta * 2; 
+            Console.WriteLine("--- Apostar a que el número es par ---");
+            Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
+            Console.WriteLine("-> Valor de los dados: " + numeroTirado);
+            Console.WriteLine("--- ¡Felicidades! ¡Has ganado $" + apuesta * 2 + "! ---");
+            DateTime fecha = DateTime.Now;
+            historial = "Tipo de apuesta: Número es par" + 
+                        "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
+                        "\nHora: " + fecha.ToString("HH:mm:ss") + 
+                        "\nApostar: Par" + 
+                        "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
+                        "\nValor de tirada: " + numeroTirado + 
+                        "\nGanancia: +$" + apuesta * 2;
+            _historial.Add(historial);
+            _numeroDeTiradasGanadas++;
+            _cantidadParesGanados++;
+            _gananciasTotales += apuesta * 2;
+        }
+        else
+        {
+            _jugador.CantiadDeDinero -= apuesta;
+            Console.WriteLine("--- Apostar a que el número es par ---");
+            Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
+            Console.WriteLine("-> Valor de los dados: " + numeroTirado);
+            Console.WriteLine("--- ¡Lo siento! ¡Perdiste! ---, su saldo es de: $" + _jugador.CantiadDeDinero);
+            DateTime fecha = DateTime.Now;
+            historial = "Tipo de apuesta: Número es par" + 
+                        "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
+                        "\nHora: " + fecha.ToString("HH:mm:ss") + 
+                        "\nApostar: Par" +
+                        "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
+                        "\nValor de tirada: " + numeroTirado + 
+                        "\nPerdida: -$" + apuesta;
+            _historial.Add(historial);
+            _numeroDeTiradasPerdidas++;
+            _cantidadParesPerdidos++;
+            _perdidasTotales += apuesta;
+        }
+        do
+        {
+            respuesta = pedirValorString(_jugador.NickName + " ¿Desea apostar otra vez? (S/N)");
+            respuesta = respuesta.ToUpper();
+        } while (respuesta != "S" && respuesta != "N");
+        Console.Clear();
+        switch (respuesta)
+        {
+            case "S":
+                ShowMenuDeApuestas();
+                break;
+            case "N":
+                ShowMenuPrincipal();
+                break;
+            default:
+                Console.WriteLine("Opción inválida");
                 break;
         }
     }
@@ -641,5 +831,15 @@ public class JuegoDeDados
             }
         } while (valor < 0);
         return valor;
+    }
+
+    public void inizializarDatos()
+    {
+        _cantidadTiradas = 15;
+        _numeroDeTiradasGanadas = 6;
+        _numeroDeTiradasPerdidas = 9;
+        _gananciasTotales = 1500;
+        _perdidasTotales = 1000;
+        
     }
 }
