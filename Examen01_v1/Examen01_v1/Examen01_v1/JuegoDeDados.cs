@@ -122,7 +122,7 @@ public class JuegoDeDados
         {
             porcentajeEfectividad = (_numeroDeTiradasGanadas / _cantidadTiradas) * 100;
         }
-        Console.WriteLine("-> Porcentaje de efectividad: " + Math.Round(porcentajeEfectividad, 4) + "%");
+        Console.WriteLine("-> Porcentaje de efectividad: " + Math.Round(porcentajeEfectividad, 2) + "%");
         Console.WriteLine("----- Estadisticas de extremos ------");
         Console.WriteLine("-> Cantidad de extremos: " + _cantidadExtremos);
         Console.WriteLine("-> Cantidad de extremos ganados: " + _cantidadExtremosGanados);
@@ -276,7 +276,7 @@ public class JuegoDeDados
         do
         {
             numeroApostado = pedirValorInt(_jugador.NickName + " ¿Cuál es el número al que desea apostar?");
-        } while (!validaNumeroExtremo(numeroApostado));
+        } while (!validaNumeroMedio(numeroApostado));
         do
         {
             apuesta = pedirValorInt(_jugador.NickName + " ¿Cuánto deseas apostar?");
@@ -285,28 +285,28 @@ public class JuegoDeDados
         TirarDados();
         int numeroTirado = _dado1 + _dado2;
         _cantidadTiradas++;
-        _cantidadExtremos++;
+        _cantidadMedios++;
         if (numeroApostado == numeroTirado)
         {
             
-            _jugador.CantiadDeDinero += apuesta * 8; 
+            _jugador.CantiadDeDinero += apuesta * 4; 
             Console.WriteLine("--- Apostar a que el número es un medio ---");
             Console.WriteLine("-> Valor apostado: " + numeroApostado);
             Console.WriteLine("-> Dado1: " + _dado1 + ", Dado2: " + _dado2);
             Console.WriteLine("-> Valor de los dados: " + (_dado1 + _dado2));
-            Console.WriteLine("--- ¡Felicidades! ¡Has ganado $" + apuesta * 8 + "! ---");
+            Console.WriteLine("--- ¡Felicidades! ¡Has ganado $" + apuesta * 4 + "! ---");
             DateTime fecha = DateTime.Now;
-            historial = "Tipo de apuesta: Número es un extremo" + 
+            historial = "Tipo de apuesta: Número es un medio" + 
                         "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
                         "\nHora: " + fecha.ToString("HH:mm:ss") + 
                         "\nValor apostado: " + numeroApostado + 
                         "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
                         "\nValor de tirada: " + numeroTirado + 
-                        "\nGanancia: $" + apuesta * 8;
+                        "\nGanancia: +$" + apuesta * 4;
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
-            _cantidadExtremosGanados++;
-            _gananciasTotales += apuesta * 8;
+            _cantidadMediosGanados++;
+            _gananciasTotales += apuesta * 4;
         }
         else
         {
@@ -317,16 +317,16 @@ public class JuegoDeDados
             Console.WriteLine("-> Valor de los dados: " + (_dado1 + _dado2));
             Console.WriteLine("--- ¡Lo siento! ¡Perdiste! ---, su saldo es de: $" + _jugador.CantiadDeDinero);
             DateTime fecha = DateTime.Now;
-            historial = "Tipo de apuesta: Número es un extremo" + 
+            historial = "Tipo de apuesta: Número es un medio" + 
                         "\nFecha: " + fecha.ToString("dd/MM/yyyy") + 
                         "\nHora: " + fecha.ToString("HH:mm:ss") + 
                         "\nValor apostado: " + numeroApostado + 
                         "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
                         "\nValor de tirada: " + numeroTirado + 
-                        "\nPerdida: $" + apuesta;
+                        "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
-            _cantidadExtremosPerdidos++;
+            _cantidadMediosPerdidos++;
             _perdidasTotales += apuesta;
         }
         do
@@ -346,6 +346,20 @@ public class JuegoDeDados
             default:
                 Console.WriteLine("Opción inválida");
                 break;
+        }
+    }
+
+    private bool validaNumeroMedio(int numeroApostado)
+    {
+        if (_valoresMedios.Contains(numeroApostado))
+        {
+            return true;
+        }
+        else
+        {
+            Console.Clear();
+            Console.WriteLine("-> El número ingresado no es un medio. Valores válidos: (5, 6, 7, 8 ó 9)" );
+            return false;
         }
     }
 
@@ -384,7 +398,7 @@ public class JuegoDeDados
                         "\nValor apostado: " + numeroApostado + 
                         "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
                         "\nValor de tirada: " + numeroTirado + 
-                        "\nGanancia: $" + apuesta * 8;
+                        "\nGanancia: +$" + apuesta * 8;
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
             _cantidadExtremosGanados++;
@@ -405,7 +419,7 @@ public class JuegoDeDados
                         "\nValor apostado: " + numeroApostado + 
                         "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
                         "\nValor de tirada: " + numeroTirado + 
-                        "\nPerdida: $" + apuesta;
+                        "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
             _cantidadExtremosPerdidos++;
@@ -477,7 +491,7 @@ public class JuegoDeDados
                         "\nValor apostado: " + numeroEspecifico + 
                         "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
                         "\nValor aleatorio: " + (_dado1 + _dado2) + 
-                        "\nGanancia: $" + apuesta * 10;
+                        "\nGanancia: +$" + apuesta * 10;
             _historial.Add(historial);
             _numeroDeTiradasGanadas++;
             _gananciasTotales += apuesta * 10;
@@ -497,7 +511,7 @@ public class JuegoDeDados
                         "\nValor apostado: " + numeroEspecifico + 
                         "\nDado1: " + _dado1 + ", Dado2: " + _dado2 + 
                         "\nValor aleatorio: " + (_dado1 + _dado2) + 
-                        "\nPerdida: $" + apuesta;
+                        "\nPerdida: -$" + apuesta;
             _historial.Add(historial);
             _numeroDeTiradasPerdidas++;
             _perdidasTotales += apuesta;
