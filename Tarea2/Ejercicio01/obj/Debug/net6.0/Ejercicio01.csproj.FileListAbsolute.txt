@@ -1,0 +1,15 @@
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\bin\Debug\net6.0\Ejercicio01.exe
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\bin\Debug\net6.0\Ejercicio01.deps.json
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\bin\Debug\net6.0\Ejercicio01.runtimeconfig.json
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\bin\Debug\net6.0\Ejercicio01.dll
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\bin\Debug\net6.0\Ejercicio01.pdb
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.csproj.AssemblyReference.cache
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.AssemblyInfoInputs.cache
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.AssemblyInfo.cs
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.csproj.CoreCompileInputs.cache
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.dll
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\refint\Ejercicio01.dll
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.pdb
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\Ejercicio01.genruntimeconfig.cache
+D:\ProgramacionVisualNET\Tarea2\Ejercicio01\obj\Debug\net6.0\ref\Ejercicio01.dll

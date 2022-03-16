@@ -1,0 +1,15 @@
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\bin\Debug\net6.0\Examen01_v1.exe
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\bin\Debug\net6.0\Examen01_v1.deps.json
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\bin\Debug\net6.0\Examen01_v1.runtimeconfig.json
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\bin\Debug\net6.0\Examen01_v1.dll
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\bin\Debug\net6.0\Examen01_v1.pdb
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.csproj.AssemblyReference.cache
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.AssemblyInfoInputs.cache
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.AssemblyInfo.cs
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.csproj.CoreCompileInputs.cache
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.dll
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\refint\Examen01_v1.dll
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.pdb
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\Examen01_v1.genruntimeconfig.cache
+D:\ProgramacionVisualNET\Examen01_v1\Examen01_v1\Examen01_v1\obj\Debug\net6.0\ref\Examen01_v1.dll
